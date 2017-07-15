@@ -71,6 +71,21 @@ sort c2010_geo_complete.csv > c2010_geo_sorted.csv
 cd sorted
 for file in *.csv; do echo "joining $file with geography"; join -t , -1 1 -2 1 ../c2010_geo_sorted.csv $file > ../joined/$file; done;
 
+cd ../joined
+
+# load to csv bucket
+gsutil rb gs://c2010_stage
+
+gsutil mb gs://c2010_stage
+gsutil cp *.csv gs://c2010_stage
+
+
+# load to bigquery
+
+
+
+
+# MISC Process Notes
 
 # prepare schema files by converting access db to csv.
 # then use: 
@@ -79,12 +94,7 @@ for file in *.csv; do echo "joining $file with geography"; join -t , -1 1 -2 1 .
 # then append the :float type to all fields
 # sed -i -e 's/,/:float,/g' filename (all fields except last, which was done manually)
 # combine seq 45 PT1 and PT2, delete PT2 file
-# geography columns then appended into each schema file
+# geography columns then appended into each schema file using:
+# for file in *.csv; do cat ../table_shells/geoStateschema.txt $file > ../schemas/$file; done;
 # remove unnecessary mod and PT1 suffix
 # saved permanently to repo so this transformation only happens once
-
-
-
-# load to csv bucket
-
-# load to bigquery
