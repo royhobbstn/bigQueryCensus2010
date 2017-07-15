@@ -8,6 +8,7 @@ mkdir concatenated
 mkdir keyed
 mkdir combined
 mkdir sorted
+mkdir joined
 
 wget https://www2.census.gov/census_2010/04-Summary_File_1/Connecticut/ct2010.sf1.zip
 wget https://www2.census.gov/census_2010/04-Summary_File_1/Delaware/de2010.sf1.zip
@@ -53,10 +54,9 @@ awk -v FIELDWIDTHS='6 2 3 2 3 2 7 1 1 2 3 2 2 5 2 2 5 2 2 6 1 4 2 5 2 2 4 5 2 1 
     ' ./concatenated/geo2010.txt > geofile2010raw.csv
 
 # remove + from lat - maybe not necessary?
-# trim all leading white space - maybe not necessary?
 
 # trim all trailing white space
-cat geofile2010raw.csv | awk 'BEGIN{ FS=" *,"; OFS="," } {$1=$1; print $0}' > geofile2010.csv
+sed -i '' -E 's/(^|,)[[:blank:]]+/\1/g; s/[[:blank:]]+(,|$)/\1/g' geofile2010.csv
 
 # add key
 awk -F "\"*,\"*" '{print $2 $7}' geofile2010.csv > geo_key.csv
@@ -68,14 +68,23 @@ paste -d , geo_key.csv geofile2010.csv > c2010_geo_complete.csv
 sort c2010_geo_complete.csv > c2010_geo_sorted.csv
 
 # join
+cd sorted
+for file in *.csv; do echo "joining $file with geography"; join -t , -1 1 -2 1 ../c2010_geo_sorted.csv $file > ../joined/$file; done;
 
-# add types into geography fields
 
-# create schema files
-    # prepend geography columns into all schema files
+# prepare schema files by converting access db to csv.
+# then use: 
+# for file in cut*.csv; do cut -d, -f1-5 --complement $file > cut$file; done;
+# to remove first 5 columns
+# then append the :float type to all fields
+# sed -i -e 's/,/:float,/g' filename (all fields except last, which was done manually)
+# combine seq 45 PT1 and PT2, delete PT2 file
+# geography columns then appended into each schema file
+# remove unnecessary mod and PT1 suffix
+# saved permanently to repo so this transformation only happens once
+
+
 
 # load to csv bucket
 
 # load to bigquery
-
-# 6 2 3 2 3 2 7 1 1 2 3 2 2 5 2 2 5 2 2 6 1 4 2 5 2 2 4 5 2 1 3 5 2 6 1 5 2 5 2 5 3 5 2 5 3 1 1 5 2 1 1 2 3 3 6 1 3 5 5 2 5 5 5 14 14 90 1 1 9 9 11 12 2 1 6 5 8 8 8 8 8 8 8 8 8 2 2 2 3 3 3 3 3 3 2 2 2 1 1 5 18
