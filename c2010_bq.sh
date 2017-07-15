@@ -55,14 +55,14 @@ awk -v FIELDWIDTHS='6 2 3 2 3 2 7 1 1 2 3 2 2 5 2 2 5 2 2 6 1 4 2 5 2 2 4 5 2 1 
 
 # remove + from lat - maybe not necessary?
 
-# trim all trailing white space
-sed -i '' -E 's/(^|,)[[:blank:]]+/\1/g; s/[[:blank:]]+(,|$)/\1/g' geofile2010.csv
+# trim all leading and trailing white space
+sed -i '' -E 's/(^|,)[[:blank:]]+/\1/g; s/[[:blank:]]+(,|$)/\1/g' geofile2010raw.csv
 
 # add key
-awk -F "\"*,\"*" '{print $2 $7}' geofile2010.csv > geo_key.csv
+awk -F "\"*,\"*" '{print $2 $7}' geofile2010raw.csv > geo_key.csv
 
 # paste key
-paste -d , geo_key.csv geofile2010.csv > c2010_geo_complete.csv
+paste -d , geo_key.csv geofile2010raw.csv > c2010_geo_complete.csv
 
 # sort
 sort c2010_geo_complete.csv > c2010_geo_sorted.csv
