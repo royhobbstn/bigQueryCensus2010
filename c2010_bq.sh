@@ -64,8 +64,11 @@ awk -F "\"*,\"*" '{print $2 $7}' geofile2010raw.csv > geo_key.csv
 # paste key
 paste -d , geo_key.csv geofile2010raw.csv > c2010_geo_complete.csv
 
+# delete columns that will be duplicated in data files
+cut -d, -f2,3,6,7,8 --complement c2010_geo_complete2.csv
+
 # sort
-sort c2010_geo_complete.csv > c2010_geo_sorted.csv
+sort c2010_geo_complete2.csv > c2010_geo_sorted.csv
 
 # join
 cd sorted
@@ -81,8 +84,16 @@ gsutil cp *.csv gs://c2010_stage
 
 
 # load to bigquery
+# bq mk c2010
 
+# unique=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1);
 
+# load estimate files to bigQuery async
+# for file in *.txt; do value=`cat $file`; snum=`expr "/$file" : '.*\(.\{3\}\)\.'`; bq --nosync --job_id=eseq$snum$unique load --ignore_unknown_values $bigqueryschema.eseq$snum gs://$databucket/eseq$snum.csv $value; done;
+
+# TODO - duplicate columns.  remove first 5!
+# value=`cat SF1_00001.csv`
+# bq load c2010.example gs://c2010_stage/sorted000012010.csv $value
 
 
 # MISC Process Notes
