@@ -65,7 +65,7 @@ awk -F "\"*,\"*" '{print $2 $7}' geofile2010raw.csv > geo_key.csv
 paste -d , geo_key.csv geofile2010raw.csv > c2010_geo_complete.csv
 
 # delete columns that will be duplicated in data files
-cut -d, -f2,3,6,7,8 --complement c2010_geo_complete2.csv
+cut -d, -f2,3,6,7,8 --complement c2010_geo_complete.csv > c2010_geo_complete2.csv
 
 # sort
 sort c2010_geo_complete2.csv > c2010_geo_sorted.csv
