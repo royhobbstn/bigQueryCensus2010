@@ -90,7 +90,7 @@ bq mk c2010
 unique=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1);
 
 # load estimate files to bigQuery async
-for file in *.csv; do value=`cat $file`; snum=`expr "/$file" : '.*\(.\{3\}\)\.'`; bq --nosync --job_id=$snum$unique load --ignore_unknown_values c2010.seq$snum gs://c2010_stage/$file $value; done;
+for file in *.csv; do value=`cat $file`; snum=`expr "/$file" : '.*\(.\{10\}\)\.'`; bq --nosync --job_id=$snum$unique load --ignore_unknown_values c2010.seq$snum gs://c2010_stage/$file $value; done;
 
 
 
