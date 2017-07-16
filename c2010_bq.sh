@@ -26,7 +26,7 @@ for i in $(seq -f "%05g" 1 47); do awk -F "\"*,\"*" '{print $2 $5}' ./concatenat
 for i in $(seq -f "%05g" 1 47); do paste -d , ./keyed/keyed"$i"2010.txt ./concatenated/cat"$i"2010.txt > ./combined/ready"$i"2010.txt; done;
 
 # sort
-for i in $(seq -f "%05g" 1 47); do sort ./combined/ready"$i"2010.txt > ./sorted/sorted"$i"2010.csv; done;
+for i in $(seq -f "%05g" 1 47); do sort ./combined/ready"$i"2010.txt > ./sorted/"$i"c2010.csv; done;
 
 
 # combine geo files
@@ -82,18 +82,17 @@ gsutil rb gs://c2010_stage
 gsutil mb gs://c2010_stage
 gsutil cp *.csv gs://c2010_stage
 
+cd ../schemas/
 
 # load to bigquery
-# bq mk c2010
+bq mk c2010
 
-# unique=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1);
+unique=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1);
 
 # load estimate files to bigQuery async
-# for file in *.txt; do value=`cat $file`; snum=`expr "/$file" : '.*\(.\{3\}\)\.'`; bq --nosync --job_id=eseq$snum$unique load --ignore_unknown_values $bigqueryschema.eseq$snum gs://$databucket/eseq$snum.csv $value; done;
+for file in *.csv; do value=`cat $file`; snum=`expr "/$file" : '.*\(.\{3\}\)\.'`; bq --nosync --job_id=$snum$unique load --ignore_unknown_values c2010.seq$snum gs://c2010_stage/$file $value; done;
 
-# TODO - duplicate columns.  remove first 5!
-# value=`cat SF1_00001.csv`
-# bq load c2010.example gs://c2010_stage/sorted000012010.csv $value
+
 
 
 # MISC Process Notes
