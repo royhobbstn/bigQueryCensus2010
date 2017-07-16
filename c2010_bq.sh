@@ -82,7 +82,7 @@ gsutil rb gs://c2010_stage
 gsutil mb gs://c2010_stage
 gsutil cp *.csv gs://c2010_stage
 
-cd ../schemas/
+cd ../../schemas/
 
 # load to bigquery
 bq mk c2010
