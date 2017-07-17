@@ -67,7 +67,7 @@ nvm install node
 npm install
 
 # trim whitespace from NAME
-node parsegeo.js
+node ../parsegeo.js
 
 # trim all leading and trailing white space
 sed -i.bat -E 's/(^|,)[[:blank:]]+/\1/g; s/[[:blank:]]+(,|$)/\1/g' geofile2010raw2.csv

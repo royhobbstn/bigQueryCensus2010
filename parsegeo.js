@@ -10,7 +10,6 @@ fs.createReadStream('./c2010/geofile2010raw.csv').pipe(
     csv.parse()).pipe(
     csv.transform(function(record) {
         record[65] = record[65].trim();
-        console.log(record[65]);
         return record;
     })).pipe(
     csv.stringify()).pipe(stream);

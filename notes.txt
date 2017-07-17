@@ -1,3 +1,12 @@
-quotes on the name field
-national same as state in terms of fields on geographies
+
+include all states
+
+echo statements, environmental variables and timers
+
+documentation
+
+national same as state in terms of fields on geographies?
 create bigquery tables schema
+
+
+revisit column mismatch acs data
