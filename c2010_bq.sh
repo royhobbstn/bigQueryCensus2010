@@ -36,8 +36,13 @@ cat ./unzipped/*geo2010.sf1 > ./concatenated/geo2010.txt
 # https://www.census.gov/prod/cen2010/doc/sf1.pdf
 # is there a schema difference between state and national?
 
+# insert quote at position 227
+sed -i.aaa 's/.\{226\}/&"/' geo2010.txt
+sed -i.aab 's/.\{317\}/&"/' geo2010.txt
+
+
 # turn non-delimited into comma delimited
-awk -v FIELDWIDTHS='6 2 3 2 3 2 7 1 1 2 3 2 2 5 2 2 5 2 2 6 1 4 2 5 2 2 4 5 2 1 3 5 2 6 1 5 2 5 2 5 3 5 2 5 3 1 1 5 2 1 1 2 3 3 6 1 3 5 5 2 5 5 5 14 14 90 1 1 9 9 11 12 2 1 6 5 8 8 8 8 8 8 8 8 8 2 2 2 3 3 3 3 3 3 2 2 2 1 1 5 18' -v OFS=',' '
+awk -v FIELDWIDTHS='6 2 3 2 3 2 7 1 1 2 3 2 2 5 2 2 5 2 2 6 1 4 2 5 2 2 4 5 2 1 3 5 2 6 1 5 2 5 2 5 3 5 2 5 3 1 1 5 2 1 1 2 3 3 6 1 3 5 5 2 5 5 5 14 14 92 1 1 9 9 11 12 2 1 6 5 8 8 8 8 8 8 8 8 8 2 2 2 3 3 3 3 3 3 2 2 2 1 1 5 18' -v OFS=',' '
    BEGIN {
       WidthsCount = split(FIELDWIDTHS, Widths);
    }
@@ -90,8 +95,8 @@ bq mk c2010
 unique=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1);
 
 # load estimate files to bigQuery async
-for file in *.csv; do value=`cat $file`; snum=`expr "/$file" : '.*\(.\{10\}\)\.'`; bq --nosync --job_id=$snum$unique load --ignore_unknown_values c2010.seq$snum gs://c2010_stage/$file $value; done;
-
+for file in *.csv; do value=`cat $file`; snum=`expr "/$file" : '.*\(.\{10\}\)\.'`; bq --nosync --job_id=$snum$unique load c2010.seq$snum gs://c2010_stage/$file $value; done;
+# for file in *.csv; do value=`cat $file`; snum=`expr "/$file" : '.*\(.\{10\}\)\.'`; bq --nosync --job_id=$snum$unique load --ignore_unknown_values c2010.seq$snum gs://c2010_stage/$file $value; done;
 
 
 

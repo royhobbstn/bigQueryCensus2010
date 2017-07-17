@@ -1,0 +1,3 @@
+quotes on the name field
+national same as state in terms of fields on geographies
+create bigquery tables schema
