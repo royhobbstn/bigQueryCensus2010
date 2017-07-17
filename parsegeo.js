@@ -4,9 +4,9 @@ var fs = require('fs');
 
 
 
-var stream = fs.createWriteStream('./geofile2010raw2.csv');
+var stream = fs.createWriteStream('./c2010/geofile2010raw2.csv');
 
-fs.createReadStream('./geofile2010raw.csv').pipe(
+fs.createReadStream('./c2010/geofile2010raw.csv').pipe(
     csv.parse()).pipe(
     csv.transform(function(record) {
         console.log(record);
