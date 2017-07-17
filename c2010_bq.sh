@@ -34,14 +34,14 @@ cat ./unzipped/*geo2010.sf1 > ./concatenated/geo2010.txt
 
 # convert to csv
 # https://www.census.gov/prod/cen2010/doc/sf1.pdf
-# is there a schema difference between state and national?
+# TODO is there a schema difference between state and national?
 
-# insert quote at position 227
+# insert quotes at position 226, 317 to prevent commas in NAME field from being interpreted as new columns
 sed -i.aaa 's/.\{226\}/&"/' ./concatenated/geo2010.txt
 sed -i.aab 's/.\{317\}/&"/' ./concatenated/geo2010.txt
 
 
-# turn non-delimited into comma delimited
+# turn non-delimited into comma delimited (accounting for quotes inserted above)
 awk -v FIELDWIDTHS='6 2 3 2 3 2 7 1 1 2 3 2 2 5 2 2 5 2 2 6 1 4 2 5 2 2 4 5 2 1 3 5 2 6 1 5 2 5 2 5 3 5 2 5 3 1 1 5 2 1 1 2 3 3 6 1 3 5 5 2 5 5 5 14 14 92 1 1 9 9 11 12 2 1 6 5 8 8 8 8 8 8 8 8 8 2 2 2 3 3 3 3 3 3 2 2 2 1 1 5 18' -v OFS=',' '
    BEGIN {
       WidthsCount = split(FIELDWIDTHS, Widths);
@@ -58,7 +58,16 @@ awk -v FIELDWIDTHS='6 2 3 2 3 2 7 1 1 2 3 2 2 5 2 2 5 2 2 6 1 4 2 5 2 2 4 5 2 1 
    }
     ' ./concatenated/geo2010.txt > geofile2010raw.csv
 
-# remove + from lat - maybe not necessary?
+wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+nvm install node
+
+npm install
+
+# trim whitespace from NAME
+node parsegeo.js
 
 # trim all leading and trailing white space
 sed -i.bat -E 's/(^|,)[[:blank:]]+/\1/g; s/[[:blank:]]+(,|$)/\1/g' geofile2010raw.csv
@@ -96,7 +105,6 @@ unique=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1);
 
 # load estimate files to bigQuery async
 for file in *.csv; do value=`cat $file`; snum=`expr "/$file" : '.*\(.\{10\}\)\.'`; bq --nosync --job_id=$snum$unique load c2010.seq$snum gs://c2010_stage/$file $value; done;
-# for file in *.csv; do value=`cat $file`; snum=`expr "/$file" : '.*\(.\{10\}\)\.'`; bq --nosync --job_id=$snum$unique load --ignore_unknown_values c2010.seq$snum gs://c2010_stage/$file $value; done;
 
 
 

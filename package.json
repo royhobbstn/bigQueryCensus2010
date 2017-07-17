@@ -1,0 +1,26 @@
+{
+  "name": "parsegeo",
+  "version": "0.0.1",
+  "description": "parse whitespace in csv file",
+  "main": "parsegeo.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/royhobbstn/bigQueryCensus2010.git"
+  },
+  "keywords": [
+    "census",
+    "2010"
+  ],
+  "author": "Daniel Trone",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/royhobbstn/bigQueryCensus2010/issues"
+  },
+  "homepage": "https://github.com/royhobbstn/bigQueryCensus2010#readme",
+  "dependencies": {
+    "csv": "^1.1.1"
+  }
+}
