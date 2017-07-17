@@ -9,8 +9,9 @@ var stream = fs.createWriteStream('./c2010/geofile2010raw2.csv');
 fs.createReadStream('./c2010/geofile2010raw.csv').pipe(
     csv.parse()).pipe(
     csv.transform(function(record) {
-        console.log(record);
-        return record.slice(54);
+        record[65] = record[65].trim();
+        console.log(record[65]);
+        return record;
     })).pipe(
     csv.stringify()).pipe(stream);
 
