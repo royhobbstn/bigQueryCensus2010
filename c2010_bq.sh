@@ -70,13 +70,13 @@ npm install
 node parsegeo.js
 
 # trim all leading and trailing white space
-sed -i.bat -E 's/(^|,)[[:blank:]]+/\1/g; s/[[:blank:]]+(,|$)/\1/g' geofile2010raw.csv
+sed -i.bat -E 's/(^|,)[[:blank:]]+/\1/g; s/[[:blank:]]+(,|$)/\1/g' geofile2010raw2.csv
 
 # add key
-awk -F "\"*,\"*" '{print $2 $7}' geofile2010raw.csv > geo_key.csv
+awk -F "\"*,\"*" '{print $2 $7}' geofile2010raw2.csv > geo_key.csv
 
 # paste key
-paste -d , geo_key.csv geofile2010raw.csv > c2010_geo_complete.csv
+paste -d , geo_key.csv geofile2010raw2.csv > c2010_geo_complete.csv
 
 # delete columns that will be duplicated in data files
 cut -d, -f2,3,6,7,8 --complement c2010_geo_complete.csv > c2010_geo_complete2.csv
