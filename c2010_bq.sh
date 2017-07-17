@@ -37,8 +37,8 @@ cat ./unzipped/*geo2010.sf1 > ./concatenated/geo2010.txt
 # is there a schema difference between state and national?
 
 # insert quote at position 227
-sed -i.aaa 's/.\{226\}/&"/' geo2010.txt
-sed -i.aab 's/.\{317\}/&"/' geo2010.txt
+sed -i.aaa 's/.\{226\}/&"/' ./concatenated/geo2010.txt
+sed -i.aab 's/.\{317\}/&"/' ./concatenated/geo2010.txt
 
 
 # turn non-delimited into comma delimited
