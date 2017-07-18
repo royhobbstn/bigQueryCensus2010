@@ -1,2 +1,4 @@
 c2010/
 node_modules/
+.zip
+*_logfile.txt

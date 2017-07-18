@@ -1,11 +1,10 @@
-
-include all states
-
-echo statements, environmental variables and timers
+custom states (see test.sh)
 
 documentation
+documentation (full with Examples) ACS
 
-national same as state in terms of fields on geographies?
+census blocks shapefiles
+
 create bigquery tables schema
 
 
