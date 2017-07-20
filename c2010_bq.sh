@@ -13,8 +13,6 @@ exec 2> >(tee -a ${LOG_FILE} >&2)
 starttime="start: `date +"%T"`"
 
 
-sudo apt-get install unzip
-
 mkdir c2010
 
 cd c2010
@@ -27,124 +25,29 @@ mkdir sorted
 mkdir joined
 
 
-# numberargs=$#
+declare -A states; states[al]=Alabama; states[ak]=Alaska; states[az]=Arizona; states[ar]=Arkansas; states[ca]=California; states[co]=Colorado; states[ct]=Connecticut; states[de]=Delaware; states[dc]=Distric_of_Columbia; states[fl]=Florida; states[ga]=Georgia; states[hi]=Hawaii; states[id]=Idaho; states[il]=Illinois; states[in]=Indiana; states[ia]=Iowa; states[ks]=Kansas; states[ky]=Kentucky; states[la]=Louisiana; states[me]=Maine; states[md]=Maryland; states[ma]=Massachusetts; states[mi]=Michigan; states[mn]=Minnesota; states[ms]=Mississippi; states[mo]=Missouri; states[mt]=Montana; states[ne]=Nebraska; states[nv]=Nevada; states[nh]=New_Hampshire; states[nj]=New_Jersey; states[nm]=New_Mexico; states[ny]=New_York; states[nc]=North_Carolina; states[nd]=North_Dakota; states[oh]=Ohio; states[ok]=Oklahoma; states[or]=Oregon; states[pa]=Pennsylvania; states[pr]=Puerto_Rico; states[ri]=Rhode_Island; states[sc]=South_Carolina; states[sd]=South_Dakota; states[tn]=Tennessee; states[tx]=Texas; states[us]=UnitedStates; states[ut]=Utah; states[vt]=Vermont; states[va]=Virginia; states[wa]=Washington; states[wv]=West_Virginia; states[wi]=Wisconsin; states[wy]=Wyoming; states[us]=National;
+
+
+numberargs=$#
 loopstates="$@"
 
-#if [ $# -eq 0 ]
-#then 
-#loopstates=${!states[@]};
-#fi
+if [ $# -eq 0 ]
+then 
+loopstates=${!states[@]};
+fi
+
 
 for var in $loopstates
 do
-if [$var -eq 'al']; then wget https://www2.census.gov/census_2010/04-Summary_File_1/Alabama/al2010.sf1.zip; fi;
-if [$var -eq 'ak']; then wget https://www2.census.gov/census_2010/04-Summary_File_1/Alaska/ak2010.sf1.zip; fi;
-if [$var -eq 'az']; then wget https://www2.census.gov/census_2010/04-Summary_File_1/Arizona/az2010.sf1.zip; fi;
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Arkansas/ar2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/California/ca2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Colorado/co2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Connecticut/ct2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Delaware/de2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/District_of_Columbia/dc2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Florida/fl2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Georgia/ga2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Hawaii/hi2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Idaho/id2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Illinois/il2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Indiana/in2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Iowa/ia2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Kansas/ks2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Kentucky/ky2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Louisiana/la2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Maine/me2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Maryland/md2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Massachusetts/ma2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Michigan/mi2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Minnesota/mn2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Mississippi/ms2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Missouri/mo2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Montana/mt2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/National/us2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Nebraska/ne2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Nevada/nv2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/New_Hampshire/nh2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/New_Jersey/nj2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/New_Mexico/nm2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/New_York/ny2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/North_Carolina/nc2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/North_Dakota/nd2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Ohio/oh2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Oklahoma/ok2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Oregon/or2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Pennsylvania/pa2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Puerto_Rico/pr2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Rhode_Island/ri2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/South_Carolina/sc2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/South_Dakota/sd2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Tennessee/tn2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Texas/tx2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Utah/ut2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Vermont/vt2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Virginia/va2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Washington/wa2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/West_Virginia/wv2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Wisconsin/wi2010.sf1.zip
-wget https://www2.census.gov/census_2010/04-Summary_File_1/Wyoming/wy2010.sf1.zip
-
-unzip -qq al2010.sf1.zip -d unzipped
-unzip -qq ak2010.sf1.zip -d unzipped
-unzip -qq az2010.sf1.zip -d unzipped
-unzip -qq ar2010.sf1.zip -d unzipped
-unzip -qq ca2010.sf1.zip -d unzipped
-unzip -qq co2010.sf1.zip -d unzipped
-unzip -qq ct2010.sf1.zip -d unzipped
-unzip -qq de2010.sf1.zip -d unzipped
-unzip -qq dc2010.sf1.zip -d unzipped
-unzip -qq fl2010.sf1.zip -d unzipped
-unzip -qq ga2010.sf1.zip -d unzipped
-unzip -qq hi2010.sf1.zip -d unzipped
-unzip -qq id2010.sf1.zip -d unzipped
-unzip -qq il2010.sf1.zip -d unzipped
-unzip -qq in2010.sf1.zip -d unzipped
-unzip -qq ia2010.sf1.zip -d unzipped
-unzip -qq ks2010.sf1.zip -d unzipped
-unzip -qq ky2010.sf1.zip -d unzipped
-unzip -qq la2010.sf1.zip -d unzipped
-unzip -qq me2010.sf1.zip -d unzipped
-unzip -qq md2010.sf1.zip -d unzipped
-unzip -qq ma2010.sf1.zip -d unzipped
-unzip -qq mi2010.sf1.zip -d unzipped
-unzip -qq mn2010.sf1.zip -d unzipped
-unzip -qq ms2010.sf1.zip -d unzipped
-unzip -qq mo2010.sf1.zip -d unzipped
-unzip -qq mt2010.sf1.zip -d unzipped
-unzip -qq us2010.sf1.zip -d unzipped
-unzip -qq ne2010.sf1.zip -d unzipped
-unzip -qq nv2010.sf1.zip -d unzipped
-unzip -qq nh2010.sf1.zip -d unzipped
-unzip -qq nj2010.sf1.zip -d unzipped
-unzip -qq nm2010.sf1.zip -d unzipped
-unzip -qq ny2010.sf1.zip -d unzipped
-unzip -qq nc2010.sf1.zip -d unzipped
-unzip -qq nd2010.sf1.zip -d unzipped
-unzip -qq oh2010.sf1.zip -d unzipped
-unzip -qq ok2010.sf1.zip -d unzipped
-unzip -qq or2010.sf1.zip -d unzipped
-unzip -qq pa2010.sf1.zip -d unzipped
-unzip -qq pr2010.sf1.zip -d unzipped
-unzip -qq ri2010.sf1.zip -d unzipped
-unzip -qq sc2010.sf1.zip -d unzipped
-unzip -qq sd2010.sf1.zip -d unzipped
-unzip -qq tn2010.sf1.zip -d unzipped
-unzip -qq tx2010.sf1.zip -d unzipped
-unzip -qq ut2010.sf1.zip -d unzipped
-unzip -qq vt2010.sf1.zip -d unzipped
-unzip -qq va2010.sf1.zip -d unzipped
-unzip -qq wa2010.sf1.zip -d unzipped
-unzip -qq wv2010.sf1.zip -d unzipped
-unzip -qq wi2010.sf1.zip -d unzipped
-unzip -qq wy2010.sf1.zip -d unzipped
+    echo "downloading $var"
+    curl --progress-bar https://www2.census.gov/census_2010/04-Summary_File_1/${states[$var]}/"$var"2010.sf1.zip -O
+    echo "unzipping $var"
+    unzip -qq "$var"2010.sf1.zip -d unzipped
 done
+
+
+exit 1
+
 
 # combine data files
 for i in $(seq -f "%05g" 1 47); do echo "combining seq $i"; cat ./unzipped/*"$i"2010.sf1 > ./concatenated/cat"$i"2010.txt; done;

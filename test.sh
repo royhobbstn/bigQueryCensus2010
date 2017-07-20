@@ -1,6 +1,6 @@
-#!/bin/bash
+!/bin/bash
 
-# numberargs=$#
+numberargs=$#
 loopstates="$@"
 
 #if [ $# -eq 0 ]
@@ -9,16 +9,19 @@ loopstates="$@"
 #fi
 echo $loopstates;
 
+if [$numberargs -eq 0]
+then $loopstates = 
+
 for var in $loopstates
 do
 
-if [ "$var"  == "al" ]
+if [ "$var" = "al" ] || [ $numberargs -eq 0 ]
 then curl --progress-bar https://www2.census.gov/census_2010/04-Summary_File_1/Alabama/al2010.sf1.zip -O;
 fi
-if [ "$var" == "ak" ]
+if [ "$var" = "ak" ]
 then curl --progress-bar https://www2.census.gov/census_2010/04-Summary_File_1/Alaska/ak2010.sf1.zip -O;
 fi
-if [ "$var" == "az" ]
+if [ "$var" = "az" ]
 then curl --progress-bar https://www2.census.gov/census_2010/04-Summary_File_1/Arizona/az2010.sf1.zip -O;
 fi
 
