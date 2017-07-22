@@ -1,5 +1,4 @@
 
-add correct geoid field to schemas (GEOID10 or GEOID?)
 
 single state doesnt work well downstream in file
 
