@@ -1,10 +1,15 @@
 
-documentation
-documentation (full with Examples) ACS
+add correct geoid field to schemas (GEOID10 or GEOID?)
 
-census blocks shapefiles
+single state doesnt work well downstream in file
+
+
+run and create all shapefiles
+
 
 create bigquery tables schema
 
 
 revisit column mismatch acs data
+documentation
+documentation (full with Examples) ACS

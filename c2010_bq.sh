@@ -46,8 +46,6 @@ do
 done
 
 
-exit 1
-
 
 # combine data files
 for i in $(seq -f "%05g" 1 47); do echo "combining seq $i"; cat ./unzipped/*"$i"2010.sf1 > ./concatenated/cat"$i"2010.txt; done;
@@ -125,9 +123,19 @@ paste -d , geo_key.csv geofile2010raw2.csv > c2010_geo_complete.csv
 echo "deleting duplicate columns"
 cut -d, -f2,3,6,7,8 --complement c2010_geo_complete.csv > c2010_geo_complete2.csv
 
+cd ..
+
+# use nodejs to add geoid field based on specific logic
+echo "adding geoid field"
+node addgeoid.js
+
+cd c2010
+
+exit 1;
+
 # sort
 echo "sorting geofile"
-sort c2010_geo_complete2.csv > c2010_geo_sorted.csv
+sort c2010_geo_complete3.csv > c2010_geo_sorted.csv
 
 # join
 cd sorted
