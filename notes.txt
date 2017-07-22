@@ -1,12 +1,16 @@
 
-
 single state doesnt work well downstream in file
 
+run and create sample dataset (small)
 
-run and create all shapefiles
+run and create all shapefiles (big)
+
+
 
 
 create bigquery tables schema
+
+run full dataset
 
 
 revisit column mismatch acs data
