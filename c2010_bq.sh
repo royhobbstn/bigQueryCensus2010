@@ -64,13 +64,15 @@ for i in $(seq -f "%05g" 1 47); do echo "sorting seq $i"; sort ./combined/ready"
 echo "combining all geo files"
 cat ./unzipped/*geo2010.sf1 > ./concatenated/geo2010.txt
 
+iconv -f iso-8859-1 -t utf-8 ./concatenated/geo2010.txt > ./concatenated/geo2010iconv.txt
+
 # convert to csv
 # https://www.census.gov/prod/cen2010/doc/sf1.pdf
 
 # insert quotes at position 226, 317 to prevent commas in NAME field from being interpreted as new columns
 echo "formatting geography name field"
-sed -i.aaa 's/.\{226\}/&"/' ./concatenated/geo2010.txt
-sed -i.aab 's/.\{317\}/&"/' ./concatenated/geo2010.txt
+sed -i.aaa 's/.\{226\}/&"/' ./concatenated/geo2010iconv.txt
+sed -i.aab 's/.\{317\}/&"/' ./concatenated/geo2010iconv.txt
 
 
 # turn non-delimited into comma delimited (accounting for quotes inserted above)
@@ -89,7 +91,7 @@ awk -v FIELDWIDTHS='6 2 3 2 3 2 7 1 1 2 3 2 2 5 2 2 5 2 2 6 1 4 2 5 2 2 4 5 2 1 
       }
       print;
    }
-    ' ./concatenated/geo2010.txt > geofile2010raw.csv
+    ' ./concatenated/geo2010iconv.txt > geofile2010raw.csv
 
 echo "installing nodejs"
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
@@ -131,8 +133,6 @@ node addgeoid.js
 
 cd c2010
 
-exit 1;
-
 # sort
 echo "sorting geofile"
 sort c2010_geo_complete3.csv > c2010_geo_sorted.csv
@@ -145,7 +145,7 @@ cd ../joined
 
 # load to csv bucket
 echo "removing $databucket bucket (if exists)"
-gsutil rb gs://$databucket
+gsutil rm -r gs://$databucket
 
 echo "creating $databucket bucket"
 gsutil mb gs://$databucket
