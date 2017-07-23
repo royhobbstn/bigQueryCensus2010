@@ -12,6 +12,7 @@ exec 2> >(tee -a ${LOG_FILE} >&2)
 
 starttime="start: `date +"%T"`"
 
+sudo apt-get install -y unzip gawk
 
 mkdir c2010
 
@@ -80,7 +81,7 @@ sed 's/.\{317\}/&"/' ./concatenated/geo1.txt > ./concatenated/geo2.txt
 
 # turn non-delimited into comma delimited (accounting for quotes inserted above)
 echo "converting geography file from txt to comma delimited"
-awk -v FIELDWIDTHS='6 2 3 2 3 2 7 1 1 2 3 2 2 5 2 2 5 2 2 6 1 4 2 5 2 2 4 5 2 1 3 5 2 6 1 5 2 5 2 5 3 5 2 5 3 1 1 5 2 1 1 2 3 3 6 1 3 5 5 2 5 5 5 14 14 92 1 1 9 9 11 12 2 1 6 5 8 8 8 8 8 8 8 8 8 2 2 2 3 3 3 3 3 3 2 2 2 1 1 5 18' -v OFS=',' '
+LC_ALL=en_US.UTF-8 gawk -v FIELDWIDTHS='6 2 3 2 3 2 7 1 1 2 3 2 2 5 2 2 5 2 2 6 1 4 2 5 2 2 4 5 2 1 3 5 2 6 1 5 2 5 2 5 3 5 2 5 3 1 1 5 2 1 1 2 3 3 6 1 3 5 5 2 5 5 5 14 14 92 1 1 9 9 11 12 2 1 6 5 8 8 8 8 8 8 8 8 8 2 2 2 3 3 3 3 3 3 2 2 2 1 1 5 18' -v OFS=',' '
    BEGIN {
       WidthsCount = split(FIELDWIDTHS, Widths);
    }
