@@ -65,17 +65,18 @@ echo "combining all geo files"
 cat ./unzipped/*geo2010.sf1 > ./concatenated/geo2010.txt
 
 
+echo "changing encoding from latin to utf8"
+iconv -f iso-8859-1 -t utf-8 ./concatenated/geo2010.txt > ./concatenated/geo2010iconv.txt
 
 # convert to csv
 # https://www.census.gov/prod/cen2010/doc/sf1.pdf
 
 # insert quotes at position 226, 317 to prevent commas in NAME field from being interpreted as new columns
 echo "formatting geography name field"
-sed -i.aaa 's/.\{226\}/&"/' ./concatenated/geo2010.txt
-sed -i.aab 's/.\{317\}/&"/' ./concatenated/geo2010.txt
+sed 's/.\{226\}/&"/' ./concatenated/geo2010iconv.txt > ./concatenated/geo1.txt
+sed 's/.\{317\}/&"/' ./concatenated/geo1.txt > ./concatenated/geo2.txt
 
-echo "changing encoding from latin to utf8"
-iconv -f iso-8859-1 -t utf-8 ./concatenated/geo2010.txt > ./concatenated/geo2010iconv.txt
+
 
 # turn non-delimited into comma delimited (accounting for quotes inserted above)
 echo "converting geography file from txt to comma delimited"
@@ -93,7 +94,7 @@ awk -v FIELDWIDTHS='6 2 3 2 3 2 7 1 1 2 3 2 2 5 2 2 5 2 2 6 1 4 2 5 2 2 4 5 2 1 
       }
       print;
    }
-    ' ./concatenated/geo2010iconv.txt > geofile2010raw.csv
+    ' ./concatenated/geo2.txt > geofile2010raw.csv
 
 echo "installing nodejs"
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
@@ -172,7 +173,7 @@ for file in *.csv; do value=`cat $file`; snum=`expr "/$file" : '.*\(.\{10\}\)\.'
 echo "cleaning up temp files on hard drive"
 cd ..
 
-rm -rf c2010
+# rm -rf c2010
 
 echo "all done."
 
