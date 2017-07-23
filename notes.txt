@@ -1,17 +1,14 @@
 
-single state doesnt work well downstream in file
 
 run and create sample dataset (small)
 
-run and create all shapefiles (big)
+join to shapefiles
 
-
-
+run full version
 
 create bigquery tables schema
 
-run full dataset
-
+launch tilesets as static on AWS or GCP (do you also need a CDN?)
 
 revisit column mismatch acs data
 documentation

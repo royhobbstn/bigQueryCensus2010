@@ -8,7 +8,6 @@ var stream = fs.createWriteStream('./c2010/c2010_geo_complete3.csv');
 fs.createReadStream('./c2010/c2010_geo_complete2.csv').pipe(
     csv.parse()).pipe(
     csv.transform(function(record) {
-        console.log(record);
         record[65] = record[65].trim();
         
         if(record[1] === '230') {
