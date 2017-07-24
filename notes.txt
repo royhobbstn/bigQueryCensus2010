@@ -1,12 +1,10 @@
-
-
-run and create sample dataset (small)
+missing tables (fields) c2010 big query
 
 join to shapefiles
 
 run full version
 
-create bigquery tables schema
+
 
 launch tilesets as static on AWS or GCP (do you also need a CDN?)
 
