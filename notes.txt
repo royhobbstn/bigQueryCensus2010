@@ -1,8 +1,9 @@
-missing tables (fields) c2010 big query
+seq44 issues - probably okay, just takes a while
+
+run full version
 
 join to shapefiles
 
-run full version
 
 
 
