@@ -8800,8 +8800,8 @@ SORT ID,SEGMENT,TABLE NUMBER,FIELD NAME,FIELD CODE,DECIMAL
 8799,"44","H5","     For seasonal, recreational, or occasional use","H0050006",0
 8800,"44","H5","     For migrant workers","H0050007",0
 8801,"44","H5","     Other vacant","H0050008",0
-8802,"44","H6","RACE OF HOUSEHOLDER [8]",,0
-8803,"44","H6","Universe: Occupied housing units",,0
+8802,"44","H6","RACE OF HOUSEHOLDER [8]",,
+8803,"44","H6","Universe: Occupied housing units",,
 8804,"44","H6","Total:","H0060001",0
 8805,"44","H6","     Householder who is White alone","H0060002",0
 8806,"44","H6","     Householder who is Black or African American alone","H0060003",0
@@ -9040,7 +9040,7 @@ SORT ID,SEGMENT,TABLE NUMBER,FIELD NAME,FIELD CODE,DECIMAL
 9039,"44","H21","Total:","H0210001",
 9040,"44","H21","     Allocated","H0210002",0
 9041,"44","H21","     Not allocated","H0210003",0
-9042,"44","H22","ALLOCATION OF TENURE [3]",,0
+9042,"44","H22","ALLOCATION OF TENURE [3]",,
 9043,"44","H22","Universe: Occupied housing units not substituted",,
 9044,"44","H22","Total:","H0220001",0
 9045,"44","H22","     Allocated","H0220002",0
