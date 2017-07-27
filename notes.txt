@@ -1,21 +1,11 @@
-seq44 issues - probably okay, just takes a while
 
-Error in query string: Error processing job 'censusbigquery:H22_OKSTF9dY1KBzi2pe': Encountered " "," ", "" at line 1, column 727.
-Was expecting:
-<EOF>
+holy moly - run without errors only directed to file?
 
-Successfully started query censusbigquery:H3_OKSTF9dY1KBzi2pe
-Successfully started query censusbigquery:H4_OKSTF9dY1KBzi2pe
-Successfully started query censusbigquery:H5_OKSTF9dY1KBzi2pe
-Error in query string: Error processing job 'censusbigquery:H6_OKSTF9dY1KBzi2pe': Encountered " "," ", "" at line 1, column 727.
-Was expecting:
-<EOF>
-
-run full version
 
 join to shapefiles
 
 
+run full version
 
 
 launch tilesets as static on AWS or GCP (do you also need a CDN?)

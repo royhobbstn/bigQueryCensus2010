@@ -10,7 +10,13 @@ fs.createReadStream('./c2010/c2010_geo_complete2.csv').pipe(
     csv.transform(function(record) {
         record[65] = record[65].trim();
         
-        if(record[1] === '230') {
+        if(record[1] === '101') {
+            record.push(record[5] + record[6] + record[15] + record[17]);
+        } else if(record[1] === '040' && record[2]==='00') {
+            record.push(record[5]);
+        } else if(record[1] === '050') {
+            record.push(record[5] + record[6]);
+        } else if(record[1] === '230') {
             record.push(record[5] + record[31]);
         } else if(record[1] === '281') {
             record.push(record[5] + record[22] + record[26]);
@@ -160,5 +166,73 @@ EXAMPLE RECORD PRE-TRANSFORMATION
  94 '9',            NMEMI
  95 '',             PUMA
  96 ''              RESERVED ]
+
+
+SUMLEV
+040
+050
+060
+070
+080
+091
+101
+140
+144
+144
+150
+154
+155
+158
+160
+261
+263
+265
+266
+267
+268
+280
+281
+282
+283
+284
+285
+286
+287
+288
+320
+321
+322
+340
+341
+500
+510
+511
+521
+531
+550
+551
+552
+553
+554
+555
+610
+612
+613
+614
+616
+620
+622
+623
+624
+626
+631
+636
+646
+647
+648
+649
+871
+881
+970
 
 */
