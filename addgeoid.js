@@ -16,41 +16,17 @@ fs.createReadStream('./c2010/c2010_geo_complete2.csv').pipe(
             record.push(record[5]);
         } else if(record[1] === '050') {
             record.push(record[5] + record[6]);
-        } else if(record[1] === '230') {
-            record.push(record[5] + record[31]);
-        } else if(record[1] === '281') {
-            record.push(record[5] + record[22] + record[26]);
-        } else if(record[1] === '060') {
-            record.push(record[5] + record[6] + record[9]);
-        } else if(record[1] === '067') {
-            record.push(record[5] + record[6] + record[9] + record[54]);
-        } else if(record[1] === '170') {
-            record.push(record[5] + record[19]);
         } else if(record[1] === '160') {
             record.push(record[5] + record[12]);
         } else if(record[1] === '140') {
             record.push(record[5] + record[6] + record[15]);
         } else if(record[1] === '150') {
             record.push(record[5] + record[6] + record[15] + record[16]);
-        } else if(record[1] === '750') {
-            record.push(record[5] + record[6] + record[15] + record[17]);
-        } else if(record[1] === '500') {
-            record.push(record[5] + record[47]);
-        } else if(record[1] === '610') {
-            record.push(record[5] + record[48]);
-        } else if(record[1] === '620') {
-            record.push(record[5] + record[49]);
-        } else if(record[1] === '950') {
-            record.push(record[5] + record[56]);
-        } else if(record[1] === '960') {
-            record.push(record[5] + record[57]);
-        } else if(record[1] === '970') {
-            record.push(record[5] + record[58]);
         } else {
             record.push('');
         }
         
-        // TODO as needed: 280, 700 (see link, special notes)
+        // TODO future consideration all as ACS expanded format GEOIDs
         
         return record;
     })).pipe(
