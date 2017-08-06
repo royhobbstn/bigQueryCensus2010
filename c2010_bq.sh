@@ -46,6 +46,7 @@ fi
 for var in $loopstates
 do
     echo "downloading $var"
+    echo "https://www2.census.gov/census_2010/04-Summary_File_1/${states[$var]}/$var/2010.sf1.zip"
     curl --progress-bar https://www2.census.gov/census_2010/04-Summary_File_1/${states[$var]}/"$var"2010.sf1.zip -O
     echo "unzipping $var"
     unzip -qq "$var"2010.sf1.zip -d unzipped
