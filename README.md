@@ -9,7 +9,7 @@ I VERY highly recommend running this from a Google Compute Instance for performa
 Make sure to check the box that says:
 *ALLOW FULL ACCESS TO ALL CLOUD APIs*
 
-If you plan on loading the entire 2010 Census, allocate an Instance with **325GB**.  
+If you plan on loading the entire 2010 Census, allocate an Instance with **1TB**.  
 
 If you insist on running this elsewhere, you will need to have the **gsutil** and **bq** tools pre-installed.  You can get them by installing the [Google Cloud SDK](https://cloud.google.com/sdk/downloads) on the machine you wish to run the bigQueryACS script from.
 I haven't tested on anything other than Google Compute Engine Debian and Ubuntu 16.04, so your mileage may vary on other OS's.

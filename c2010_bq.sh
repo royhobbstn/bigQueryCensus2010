@@ -5,9 +5,11 @@ databucket=c2010_stage;
 bigqueryschema=c2010;
 
 dir=$(pwd)
-LOG_FILE="$dir/c2010_logfile.txt"
+LOG_FILE="$dir/c2010_out_logfile.txt"
+ERR_FILE="$dir/c2010_err_logfile.txt"
+
 exec > >(tee -a ${LOG_FILE} )
-exec 2> >(tee -a ${LOG_FILE} >&2)
+exec 2> >(tee -a ${ERR_FILE} >&2)
 
 
 starttime="start: `date +"%T"`"
