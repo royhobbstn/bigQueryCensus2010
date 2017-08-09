@@ -1,3 +1,7 @@
+
+**I have made these into public datasets [(info)](https://cloud.google.com/bigquery/public-data/).  So if you'd rather not load all of this data yourself, you can get started right away with [these instructions](USING_DATA.md).**
+
+
 # bigQueryCensus2010
 Automate loading of Census 2010 data into Google BigQuery
 
@@ -64,8 +68,6 @@ When finished, exit a screen like you would with a normal session:
 exit
 ```
 
-
-
 ## Customization
 
 By default, this script will load the data files into a bucket called ```c2010_stage```.  It will create a BigQuery schema named ```acs1115```.
@@ -92,36 +94,22 @@ Then [exit VIM](https://stackoverflow.blog/2017/05/23/stack-overflow-helping-one
 As with the ACS script, a bigger instance doesn't necessarily lead to faster loads. Network speed is the main contributor to performance.
 
 
-## How do I use this data?
-
-Google has a [GUI](https://bigquery.cloud.google.com/queries/) if you have any one-off or exploratory queries you'd like to run.
-
-Here's an example query for finding the Median Household Income for all counties in Colorado.
-
-```
-TODO Query
-```
-
-As you may have noticed from the above query, I have purposely [denormalized](https://cloud.google.com/bigquery/preparing-data-for-loading) the data for improved query performance.  In the vast majority of cases, you should not need any JOINs in your data.
-
-
-You can also use BigQuery through APIs written in [many different languages](https://cloud.google.com/bigquery/create-simple-app-api).
-
-
 ## Sequence Number Tables?
 
-Yeah, I know.  It's a pain to have to look up not only the field that corresponds to the statistic that you're looking for, but also the sequence table.  [Here's a document that can help.](https://www2.census.gov/programs-surveys/acs/summary_file/2015/documentation/user_tools/ACS_5yr_Seq_Table_Number_Lookup.xls) 
+Yeah, I know.  It's a pain to have to look up not only the field that corresponds to the statistic that you're looking for, but also the sequence table.
 If you don't want to go through the pain of looking up sequence numbers, good news!  I have another script for that.  It turns all of those sequence tables into logical census tables.
 
 You can run the query as a bash script:
 
 ```
-TODO bash createSQL.sh
+bash createSQL.sh
 ```
 
 If you used a non-default bigQuery schema name, you'll need to edit the configuration variables at the top of the file:
 
-```sudo vi createSQL.sh```
+```
+sudo vi createSQL.sh
+```
 
 You'll see something like:
 
@@ -136,16 +124,6 @@ bigquerytableschema=c2010tables;
 ```bigquerytableschema``` is a new schema where you want the table files to end up.
 
 
-### This will not be quick either
+## Sample Queries
 
-TODO Benchmark
-
-### Using Table Data
-
-When all is said and done, your new [GUI](https://bigquery.cloud.google.com/queries/) query will look like this:
-
-
-```
-TODO
-```
-
+For sample queries, check out the [Using Data](USING_DATA.md) page in this repo.
